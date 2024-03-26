@@ -1,11 +1,11 @@
 base_hex_dec_b_sa1:
-; converts hex number (1 byte) to decimal number (3 bytes).
-; uses sa1 arithmetic regs.
-; ----------------
-; $00 (1) -> hex number.
-; ----------------
-; $01 (3) <- decimal number.
-; ----------------
+    ; converts hex number (1 byte) to decimal number (3 bytes).
+    ; uses sa1 arithmetic regs.
+    ; ----------------
+    ; $00 (1) -> hex number.
+    ; ----------------
+    ; $01 (3) <- decimal number.
+    ; ----------------
     lda #$01
     sta $2250
     lda $00
