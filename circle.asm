@@ -1,11 +1,11 @@
 circle_y:
-; returns radius*sin(angle).
-; ----------------
-; $04 (2) -> angle. (functionally $0000 to $01ff; 7 highest bits are ignored)
-; $06 (1) -> radius. ($00 to $ff)
-; ----------------
-; $09 (2) -> y displacement.
-; ----------------
+    ; returns radius*sin(angle).
+    ; ----------------
+    ; $04 (2) -> angle. (functionally $0000 to $01ff; 7 highest bits are ignored)
+    ; $06 (1) -> radius. ($00 to $ff)
+    ; ----------------
+    ; $09 (2) -> y displacement.
+    ; ----------------
     phx
     lda $05
     lsr
@@ -29,13 +29,13 @@ circle_y:
     rtl
     
 circle_x:
-; returns radius*cos(angle).
-; ----------------
-; $04 (2) -> angle. (functionally $0000 to $01ff; 7 highest bits are ignored
-; $06 (1) -> radius. ($00 to $ff)
-; ----------------
-; $07 (2) -> x displacement.
-; ----------------
+    ; returns radius*cos(angle).
+    ; ----------------
+    ; $04 (2) -> angle. (functionally $0000 to $01ff; 7 highest bits are ignored
+    ; $06 (1) -> radius. ($00 to $ff)
+    ; ----------------
+    ; $07 (2) -> x displacement.
+    ; ----------------
     phx
     lda $04
     clc
