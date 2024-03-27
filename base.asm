@@ -1,35 +1,99 @@
 base_hex_dec_b_sa1:
-    ; converts hex number (1 byte) to decimal number (3 bytes).
+    ; converts unsigned hex number (byte) to decimal number.
     ; uses sa1 arithmetic regs.
     ; ----------------
-    ; $00 (1) -> hex number.
+    ; A (1) -> hex number (unsigned).
     ; ----------------
-    ; $01 (3) <- decimal number.
+    ; $02 (3) <- decimal number.
     ; ----------------
-    lda #$01
-    sta $2250
-    lda $00
+    php
+    sep #$20
+    
     sta $2251
     stz $2252
-    lda #100
-    sta $2253
-    stz $2254
-    nop #3
-    lda $2306
-    sta $01
-    lda $2308
-    sta $02
     lda #$01
     sta $2250
-    lda $02
-    sta $2251
-    stz $2252
-    lda #10
+    lda.b #100
     sta $2253
     stz $2254
     nop #3
     lda $2306
     sta $02
+    
     lda $2308
+    sta $2251
+    stz $2252
+    lda #$01
+    sta $2250
+    lda.b #10
+    sta $2253
+    stz $2254
+    nop #3
+    lda $2306
     sta $03
+    
+    lda $2308
+    sta $04
+    
+    plp
+    rtl
+    
+base_hex_dec_w_sa1:
+    ; converts unsigned hex number (word) to decimal number.
+    ; uses sa1 arithmetic regs.
+    ; ----------------
+    ; A (2) -> hex number (unsigned).
+    ; ----------------
+    ; $00 (5) <- decimal number.
+    ; ----------------
+    phx
+    phy
+    php
+    rep #$20
+    sep #$10
+    ldx #$01
+    
+    ror
+    sta $2251
+    stx $2250
+    lda.w #5000
+    sta $2253
+    nop #3
+    ldy $2306
+    sty $00
+    
+    lda $2308
+    rol
+    sta $2251
+    stx $2250
+    lda.w #1000
+    sta $2253
+    nop #3
+    ldy $2306
+    sty $01
+    
+    lda $2308
+    sta $2251
+    stx $2250
+    lda.w #100
+    sta $2253
+    nop #3
+    ldy $2306
+    sty $02
+    
+    lda $2308
+    sta $2251
+    stx $2250
+    lda.w #10
+    sta $2253
+    nop #3
+    ldy $2306
+    sty $03
+    
+    ldy $2308
+    sty $04
+    
+    plp
+    ply
+    plx
     rtl
