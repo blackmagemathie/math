@@ -1,10 +1,10 @@
 base_hex_dec_b_sa1:
-    ; converts unsigned hex number (byte) to decimal number.
+    ; converts hex number (byte) to decimal number.
     ; uses sa1 arithmetic regs.
     ; ----------------
-    ; A (1) -> hex number (unsigned).
+    ; A (1) -> hex number, unsigned.
     ; ----------------
-    ; $02 (3) <- decimal number.
+    ; $00 (3) <- decimal number, little endian.
     ; ----------------
     php
     sep #$20
@@ -30,21 +30,21 @@ base_hex_dec_b_sa1:
     stz $2254
     nop #3
     lda $2306
-    sta $03
+    sta $01
     
     lda $2308
-    sta $04
+    sta $00
     
     plp
     rtl
     
 base_hex_dec_w_sa1:
-    ; converts unsigned hex number (word) to decimal number.
+    ; converts hex number (word) to decimal number.
     ; uses sa1 arithmetic regs.
     ; ----------------
-    ; A (2) -> hex number (unsigned).
+    ; A (2) -> hex number, unsigned.
     ; ----------------
-    ; $00 (5) <- decimal number.
+    ; $00 (5) <- decimal number, little endian.
     ; ----------------
     phx
     phy
@@ -60,7 +60,7 @@ base_hex_dec_w_sa1:
     sta $2253
     nop #3
     ldy $2306
-    sty $00
+    sty $04
     
     lda $2308
     rol
@@ -70,7 +70,7 @@ base_hex_dec_w_sa1:
     sta $2253
     nop #3
     ldy $2306
-    sty $01
+    sty $03
     
     lda $2308
     sta $2251
@@ -88,10 +88,10 @@ base_hex_dec_w_sa1:
     sta $2253
     nop #3
     ldy $2306
-    sty $03
+    sty $01
     
     ldy $2308
-    sty $04
+    sty $00
     
     plp
     ply
