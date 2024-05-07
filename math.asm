@@ -4,6 +4,7 @@ freecode
     
     incsrc "circle.asm"
     incsrc "base.asm"
+    incsrc "bresenham.asm"
     
 freedata
     
