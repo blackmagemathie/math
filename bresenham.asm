@@ -7,6 +7,7 @@ circle:
     ; ----------------
     ; $3700   <- octant data (ends with $00).
     ; X (2)   <- octant data size (excluding $00 at end).
+    ; carry   <- clear = ends before diagonal; set = ends on diagonal.
     ; $02 (6) <- (garbage)
     ; ----------------
     !r = $00
@@ -16,7 +17,6 @@ circle:
     
     php
     rep #$30
-    
     ldy #$0000
     ldx #$0000
     lda !r
@@ -28,7 +28,6 @@ circle:
     adc #$0005
     sta !m
     stz !x
-    
     .loop:
         lda !x
         cmp !y
@@ -59,16 +58,18 @@ circle:
         sta !m
         bra .loop
     .end:
-    
-    ; plot last point,
     tya
     sta $3700,x
-    ; then adjust x.
     beq +
     inx
     +
-    
+    txa
+    clc
+    adc !x
+    sec
+    sbc !r
     plp
+    lsr
     rtl
     
     undef "r"
