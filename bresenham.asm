@@ -4,16 +4,17 @@ circle:
     ; computes a full circle octant.
     ; ----------------
     ; $00 (2) -> radius, unsigned.
+    ; $08 (3) -> octant data pointer.
     ; ----------------
-    ; $3700   <- octant data (ends with $00).
-    ; X (2)   <- octant data size (excluding $00 at end).
-    ; carry   <- clear = ends before diagonal; set = ends on diagonal.
-    ; $02 (6) <- (garbage)
+    ; [$08]   <- octant data (ends with $00).
+    ; $02 (2) <- $0001 = ends on diagonal.
+    ; $04 (2) <- octant data size (excluding $00 at end).
     ; ----------------
     !r = $00
     !x = $02
     !y = $04
     !m = $06
+    !p = $08
     
     php
     rep #$30
@@ -32,14 +33,14 @@ circle:
         lda !x
         cmp !y
         bcs .end
-        iny
+        inx
         lda !m
         beq +
         bmi +
-            tya
-            sta $3700,x
-            inx
-            ldy #$0000
+            txa
+            sta [$08],y
+            iny
+            ldx #$0000
             dec !y
             lda !y
             asl #3
@@ -58,23 +59,25 @@ circle:
         sta !m
         bra .loop
     .end:
-    tya
-    sta $3700,x
-    beq +
-    inx
-    +
     txa
+    sta [$08],y
+    beq +
+    iny
+    +
+    tya
+    sta !y ; octant data size
     clc
     adc !x
     sec
     sbc !r
+    sta !x ; diagonal ending type
     plp
-    lsr
     rtl
     
     undef "r"
     undef "x"
     undef "y"
     undef "m"
+    undef "p"
 
 namespace off
