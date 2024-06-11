@@ -6,9 +6,10 @@ circle:
     ; $00 (2) -> radius, unsigned.
     ; $08 (3) -> octant data pointer.
     ; ----------------
-    ; [$08]   <- octant data.
     ; $02 (2) <- diagonal type. 0 = none; 1 = square.
     ; $04 (2) <- octant data size.
+    ; $06 (2) <- (garbage)
+    ; [$08]   <- octant data.
     ; ----------------
     !r = $00
     !x = $02
@@ -74,10 +75,4 @@ circle:
     plp
     rtl
     
-    undef "r"
-    undef "x"
-    undef "y"
-    undef "m"
-    undef "p"
-
 namespace off
