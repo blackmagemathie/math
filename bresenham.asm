@@ -6,9 +6,9 @@ circle:
     ; $00 (2) -> radius, unsigned.
     ; $08 (3) -> octant data pointer.
     ; ----------------
-    ; [$08]   <- octant data (ends with $00).
-    ; $02 (2) <- $0001 = ends on diagonal.
-    ; $04 (2) <- octant data size (excluding $00 at end).
+    ; [$08]   <- octant data.
+    ; $02 (2) <- diagonal type. 0 = none; 1 = square.
+    ; $04 (2) <- octant data size.
     ; ----------------
     !r = $00
     !x = $02
