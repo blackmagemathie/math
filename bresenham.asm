@@ -6,8 +6,8 @@ circle:
     ; $00 (2) -> radius, unsigned.
     ; $08 (3) -> octant data pointer.
     ; ----------------
-    ; $02 (2) <- diagonal type. 0 = none; 1 = square.
-    ; $04 (2) <- octant data size.
+    ; $02 (2) <- diagonal size.
+    ; $04 (2) <- octant data size (excluding diagonal).
     ; $06 (2) <- (garbage)
     ; [$08]   <- octant data.
     ; ----------------
@@ -66,12 +66,17 @@ circle:
     iny
     +
     tya
-    sta !y ; octant data size
     clc
     adc !x
     sec
     sbc !r
-    sta !x ; diagonal ending type
+    beq +
+    dey 
+    lda [$08],y
+    and #$00ff
+    +
+    sta !x
+    sty !y
     plp
     rtl
     
