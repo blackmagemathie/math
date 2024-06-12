@@ -1,4 +1,4 @@
-# math
+# math.asm
 
 ## license
 
@@ -6,4 +6,4 @@
 
 ## overview
 
-**math** is a [Callisto module](https://github.com/Underrout/callisto). it provides a variety of math-related routines for other SMW resources.
+**math** is a [Callisto module](https://github.com/Underrout/callisto), with some **SA1-only** functions. it provides a variety of math-related routines for other SMW resources.
