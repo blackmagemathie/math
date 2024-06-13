@@ -6,6 +6,7 @@ freecode
     incsrc "base.asm"
     incsrc "bresenham.asm"
     incsrc "root.asm"
+    incsrc "hypotenuse.asm"
     
 freedata
     
