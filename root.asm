@@ -1,5 +1,6 @@
 root_w:
     ; returns square root.
+    ; uses bit-by-bit calculation.
     ; ----------------
     ; $00 (2) -> number, unsigned.
     ; ----------------
